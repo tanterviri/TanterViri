@@ -16,7 +16,7 @@
 .hero-title {
   display: inline-block;
   position: relative;
-  animation: title-drop 1.2s ease-out forwards;
+  animation: title-drop 2s ease-out forwards;
 }
 
 /* Ключевые кадры анимации: сверху вниз в центр */
