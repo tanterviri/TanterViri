@@ -27,6 +27,8 @@
       align-items: center;
       text-align: center;
       padding: 20px;
+      position: relative;
+      overflow: hidden; /* чтобы не было видно заголовок до появления */
     }
 
     .hero-content {
@@ -36,10 +38,29 @@
       max-width: 90%;
     }
 
-    .hero h1 {
+    /* Анимация заголовка */
+    .hero-title {
       font-size: 52px;
       letter-spacing: 0.15em;
       margin: 0;
+      display: inline-block;
+      position: relative;
+      animation: title-drop 1.2s ease-out forwards;
+    }
+
+    @keyframes title-drop {
+      0% {
+        transform: translateY(-150%);
+        opacity: 0;
+      }
+      60% {
+        transform: translateY(10%);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .hero p {
@@ -185,7 +206,7 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .hero h1 {
+      .hero-title {
         font-size: 40px;
         letter-spacing: 0.1em;
       }
@@ -205,7 +226,7 @@
         grid-template-columns: 1fr;
       }
 
-      .hero h1 {
+      .hero-title {
         font-size: 32px;
         letter-spacing: 0.08em;
       }
@@ -233,7 +254,7 @@
 <body>
   <div class="hero">
     <div class="hero-content">
-      <h1>TANTERcreativity</h1>
+      <h1 class="hero-title">TANTERcreativity</h1>
       <p>Творчество в темных тонах</p>
     </div>
   </div>
