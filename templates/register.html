@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Регистрация — TANTERcreativity</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <h1>Регистрация</h1>
+
+      {% if error %}
+        <div class="auth-error">{{ error }}</div>
+      {% endif %}
+
+      <form method="post">
+        <label>
+          Ник:
+          <input type="text" name="username" required>
+        </label>
+        <label>
+          Пароль:
+          <input type="password" name="password" required>
+        </label>
+        <button type="submit">Создать аккаунт</button>
+      </form>
+
+      <p class="auth-switch">
+        Уже есть аккаунт? <a href="{{ url_for('login') }}">Войти</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

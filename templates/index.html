@@ -17,6 +17,11 @@
   </div>
 
   <main>
+    <!-- Информация о пользователе -->
+    <section class="section dark-1">
+      <p>Вы вошли как <strong>{{ username }}</strong>. <a href="{{ url_for('logout') }}">Выйти</a></p>
+    </section>
+
     <!-- ВТОРАЯ секция: форма загрузки работ пользователями (сразу после шапки) -->
     <section class="section dark-2">
       <h2>Добавить свою работу</h2>
