@@ -5,251 +5,8 @@
   <title>TANTERcreativity</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #f5f5f5;
-      background: #000000;
-    }
-
-    /* Шапка */
-    .hero {
-      min-height: 50vh;
-      background: url("images/hero.jpg") center/cover no-repeat #000000;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-      position: relative;
-      overflow: hidden; /* чтобы не было видно заголовок до появления */
-    }
-
-    .hero-content {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 20px 30px;
-      border-radius: 16px;
-      max-width: 90%;
-    }
-
-    /* Анимация заголовка */
-    .hero-title {
-      font-size: 52px;
-      letter-spacing: 0.15em;
-      margin: 0;
-      display: inline-block;
-      position: relative;
-      animation: title-drop 1.2s ease-out forwards;
-    }
-
-    @keyframes title-drop {
-      0% {
-        transform: translateY(-150%);
-        opacity: 0;
-      }
-      60% {
-        transform: translateY(10%);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .hero p {
-      margin-top: 10px;
-      margin-bottom: 0;
-      color: #aaaaaa;
-    }
-
-    /* Фон ниже — темный градиент */
-    main {
-      background: linear-gradient(to bottom, #101010 0%, #1b1b1b 50%, #252525 100%);
-    }
-
-    .section {
-      padding: 40px 20px;
-    }
-
-    .section h2 {
-      margin-top: 0;
-    }
-
-    .dark-1 {
-      background: rgba(20, 20, 20, 0.9);
-    }
-
-    .dark-2 {
-      background: rgba(35, 35, 35, 0.9);
-    }
-
-    /* Контейнер для кнопок */
-    .contacts-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    /* Галерея картинок (старая авто-галерея) */
-    .gallery {
-      margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(120px, 1fr));
-      gap: 16px;
-    }
-
-    .gallery img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      display: block;
-      border-radius: 8px;
-      object-fit: cover;
-      background: #2a2a2a;
-    }
-
-    /* Творческая галерея (карточки) */
-    .creative-gallery-container {
-      margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .creative-item {
-      background: #111111;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .creative-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      background: #222222;
-    }
-
-    .creative-body {
-      padding: 10px 12px 12px;
-      font-size: 14px;
-    }
-
-    .creative-title {
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .creative-meta {
-      font-size: 12px;
-      opacity: 0.75;
-      margin-bottom: 6px;
-    }
-
-    .creative-desc {
-      font-size: 13px;
-      line-height: 1.35;
-      opacity: 0.9;
-    }
-
-    .creative-tags {
-      font-size: 11px;
-      opacity: 0.7;
-      margin-top: 6px;
-    }
-
-    /* Кнопки */
-    button {
-      background: #4caf50;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    button:hover {
-      background: #45a049;
-    }
-
-    /* ===== АДАПТИВ ===== */
-
-    /* Планшеты */
-    @media (max-width: 1024px) {
-      .gallery {
-        grid-template-columns: repeat(3, minmax(100px, 1fr));
-      }
-
-      .creative-gallery-container {
-        grid-template-columns: repeat(2, minmax(200px, 1fr));
-      }
-    }
-
-    /* Малые планшеты / большие телефоны */
-    @media (max-width: 768px) {
-      .gallery {
-        grid-template-columns: repeat(2, minmax(120px, 1fr));
-      }
-
-      .creative-gallery-container {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .hero-title {
-        font-size: 40px;
-        letter-spacing: 0.1em;
-      }
-
-      .section {
-        padding: 32px 16px;
-      }
-    }
-
-    /* Телефоны */
-    @media (max-width: 480px) {
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-
-      .creative-gallery-container {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-title {
-        font-size: 32px;
-        letter-spacing: 0.08em;
-      }
-
-      .hero-content {
-        padding: 16px 18px;
-      }
-
-      .section {
-        padding: 24px 16px;
-      }
-
-      .contacts-buttons {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      button {
-        width: 100%;
-        text-align: center;
-      }
-    }
-  </style>
+  <!-- Подключаем внешний CSS из static/css/style.css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <div class="hero">
@@ -260,19 +17,38 @@
   </div>
 
   <main>
-    <!-- ПЕРВАЯ секция: контакты -->
-    <section class="section dark-1">
-      <h2>Связаться со мной</h2>
-      <p>Выбери удобный способ, чтобы отправить свои работы.</p>
+    <!-- ВТОРАЯ секция: форма загрузки работ пользователями (сразу после шапки) -->
+    <section class="section dark-2">
+      <h2>Добавить свою работу</h2>
+      <p>Загрузи изображение (PNG/JPG до 2 МБ), оно попадёт в общую галерею ниже.</p>
 
-      <div class="contacts-buttons">
-        <button onclick="window.open('https://t.me/Tannter', '_blank')">Telegram</button>
-        <button onclick="window.open('https://vk.com/tannter', '_blank')">VK</button>
+      <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Загрузить</button>
+      </form>
+    </section>
+
+    <!-- ПЯТАЯ секция: галерея загруженных пользователями файлов (сразу после формы) -->
+    <section class="section dark-1">
+      <h2>Галерея работ пользователей</h2>
+      <p>Здесь появляются изображения, загруженные через форму выше.</p>
+
+      <div class="gallery">
+        {% for filename in uploaded_files %}
+          <div class="image-card">
+            <img src="{{ url_for('static', filename='uploads/' ~ filename) }}" alt="{{ filename }}">
+            <button class="like-btn" data-id="{{ filename }}">
+              ❤ <span class="like-count">{{ like_counts.get(filename, 0) }}</span>
+            </button>
+          </div>
+        {% else %}
+          <p>Пока ни одной работы. Будь первым!</p>
+        {% endfor %}
       </div>
     </section>
 
-    <!-- ВТОРАЯ секция: ТВОРЧЕСКАЯ ГАЛЕРЕЯ (карточки с описаниями) -->
-    <section class="section dark-2">
+    <!-- ТРЕТЬЯ секция: ТВОРЧЕСКАЯ ГАЛЕРЕЯ (по creative.json, как было) -->
+    <section class="section dark-1">
       <h2>Творческая галерея</h2>
       <p>Серия работ в темных тонах: название, автор, год и короткая история каждой работы.</p>
 
@@ -281,45 +57,25 @@
       </div>
     </section>
 
-    <!-- ТРЕТЬЯ секция: исходная авто-галерея из images.json -->
-    <section class="section dark-1">
-      <h2>Галерея работ</h2>
-      <p>Быстрый просмотр всех изображений без описаний.</p>
+    <!-- ПЕРВАЯ секция (перенесена вниз): контакты -->
+    <section class="section dark-2">
+      <h2>Связаться со мной</h2>
+      <p>Выбери удобный способ, чтобы отправить свои работы.</p>
 
-      <div class="gallery" id="autoGallery">
-        <!-- Сюда JS сам добавит картинки -->
+      <div class="contacts-buttons">
+        <button onclick="window.open('https://t.me/Tannter', '_blank')">Telegram</button>
+        <button onclick="window.open('https://vk.com/tannter', '_blank')">VK</button>
       </div>
     </section>
   </main>
 
+  <!-- Модальное окно для просмотра изображения крупно -->
+  <div class="image-modal" id="imageModal">
+    <span class="image-modal-close" id="imageModalClose">&times;</span>
+    <img id="imageModalImg" src="" alt="">
+  </div>
+
   <script>
-    // Старая авто-галерея по images.json (как у тебя было)
-    async function loadGallery() {
-      try {
-        const response = await fetch('images/images.json');
-        if (!response.ok) {
-          console.error('Не могу получить images.json', response.status);
-          return;
-        }
-
-        const files = await response.json(); // массив имён файлов
-        const container = document.getElementById('autoGallery');
-        if (!container) return;
-
-        container.innerHTML = '';
-
-        files.forEach((fileName) => {
-          const img = document.createElement('img');
-          img.src = 'images/' + fileName;
-          img.alt = fileName;
-          img.className = 'slot';
-          container.appendChild(img);
-        });
-      } catch (e) {
-        console.error('Ошибка при загрузке галереи', e);
-      }
-    }
-
     // Новая творческая галерея по creative.json
     async function loadCreativeGallery() {
       try {
@@ -380,8 +136,74 @@
       }
     }
 
-    loadGallery();
     loadCreativeGallery();
+
+    // Увеличение картинки по клику (для всех галерей)
+    document.addEventListener('DOMContentLoaded', function () {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('imageModalImg');
+      const modalClose = document.getElementById('imageModalClose');
+
+      function openModal(src, alt) {
+        modalImg.src = src;
+        modalImg.alt = alt || '';
+        modal.classList.add('open');
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modalImg.src = '';
+        modalImg.alt = '';
+      }
+
+      // Клик по картинкам в .gallery и .creative-gallery-container
+      document.body.addEventListener('click', function (e) {
+        const target = e.target;
+        if (target.tagName === 'IMG' && target.closest('.gallery, .creative-gallery-container')) {
+          openModal(target.src, target.alt);
+        }
+      });
+
+      // Закрытие по крестику
+      modalClose.addEventListener('click', closeModal);
+
+      // Закрытие по клику по фону
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Закрытие по Esc
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeModal();
+        }
+      });
+    });
+
+    // Лайки для галереи пользователей
+    document.addEventListener("click", async (e) => {
+      if (e.target.classList.contains("like-btn") || e.target.closest(".like-btn")) {
+        const btn = e.target.closest(".like-btn");
+        const imageId = btn.dataset.id;
+        const countSpan = btn.querySelector(".like-count");
+
+        const formData = new FormData();
+        formData.append("image_id", imageId);
+
+        const res = await fetch("/like", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!res.ok) return;
+        const data = await res.json();
+
+        countSpan.textContent = data.count;
+        btn.classList.toggle("liked", data.liked);
+      }
+    });
   </script>
 </body>
 </html>

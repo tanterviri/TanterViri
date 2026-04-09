@@ -90,7 +90,7 @@ main {
   margin-top: 16px;
 }
 
-/* Галерея картинок (старая авто-галерея) */
+/* Галерея картинок (старая авто-галерея и галерея пользователей) */
 .gallery {
   margin-top: 20px;
   display: grid;
@@ -98,13 +98,37 @@ main {
   gap: 16px;
 }
 
+/* Карточка для пользовательских работ */
+.image-card {
+  background: transparent;
+  text-align: center;
+}
+
+/* Картинки в галерее */
 .gallery img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: auto;
   display: block;
   border-radius: 8px;
-  object-fit: cover;
   background: #2a2a2a;
+  cursor: pointer; /* чтобы было видно, что по картинке можно кликать */
+}
+
+/* Кнопка лайка */
+.like-btn {
+  margin-top: 6px;
+  background: none;
+  border: 1px solid #666;
+  color: #f5f5f5;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.like-btn.liked {
+  border-color: #ff4b81;
+  color: #ff4b81;
 }
 
 /* Творческая галерея (карточки) */
@@ -175,6 +199,11 @@ button:hover {
   background: #45a049;
 }
 
+/* не ломаем общий стиль для like-btn поверх базового button */
+.like-btn {
+  background: none;
+}
+
 /* ===== АДАПТИВ ===== */
 
 /* Планшеты */
@@ -240,4 +269,36 @@ button:hover {
     width: 100%;
     text-align: center;
   }
+}
+
+/* Модальное окно для просмотра картинки крупно */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;           /* по умолчанию скрыто */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.image-modal.open {
+  display: flex;
+}
+
+.image-modal img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+/* крестик закрытия */
+.image-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 28px;
+  color: #f5f5f5;
+  cursor: pointer;
 }
