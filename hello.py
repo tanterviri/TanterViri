@@ -12,7 +12,7 @@ app = Flask(__name__)
 # СЕКРЕТНЫЙ КЛЮЧ ДЛЯ СЕССИЙ
 app.config["SECRET_KEY"] = "очень-секретный-ключ-замени-потом"
 
-# SQLite-файл ЛЕЖИТ В ПАПКЕ ПРОЕКТА
+# SQLite-файл ЛЕЖИТ В ПАПКЕ ПРОЕКТА (db.sqlite рядом с hello.py)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -124,6 +124,7 @@ def logout():
 @app.route("/", methods=["GET"])
 @login_required
 def index():
+    # Собираем список загруженных файлов
     uploads_dir = app.config["UPLOAD_FOLDER"]
     os.makedirs(uploads_dir, exist_ok=True)
     files = [
@@ -151,6 +152,7 @@ def index():
 @app.route("/upload", methods=["POST"])
 @login_required
 def upload():
+    # Проверяем, есть ли файл в запросе
     if "image" not in request.files:
         return redirect(url_for("index"))
 
@@ -158,6 +160,7 @@ def upload():
     if file.filename == "":
         return redirect(url_for("index"))
 
+    # Проверка расширения и сохранение
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         uploads_dir = app.config["UPLOAD_FOLDER"]
@@ -194,8 +197,6 @@ def like():
 
     # пересчёт количества лайков
     count = Like.query.filter_by(image_name=image_id).count()
-
-    # проверяем, лайкнул ли сейчас пользователь
     liked = Like.query.filter_by(image_name=image_id, user_id=user.id).first() is not None
 
     return jsonify({"count": count, "liked": liked})
