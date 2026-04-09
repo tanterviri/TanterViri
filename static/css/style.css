@@ -12,7 +12,7 @@ body {
 /* Шапка */
 .hero {
   min-height: 50vh;
-  background: url("images/hero.jpg") center/cover no-repeat #000000;
+  background: url("../images/hero.jpg") center/cover no-repeat #000000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +20,7 @@ body {
   text-align: center;
   padding: 20px;
   position: relative;
-  overflow: hidden; /* чтобы не было видно заголовок до появления */
+  overflow: hidden;
 }
 
 .hero-content {
@@ -37,7 +37,7 @@ body {
   margin: 0;
   display: inline-block;
   position: relative;
-  animation: title-drop 3s ease-out forwards; /* 3 секунды */
+  animation: title-drop 3s ease-out forwards;
 }
 
 @keyframes title-drop {
@@ -90,28 +90,35 @@ main {
   margin-top: 16px;
 }
 
-/* Галерея картинок (старая авто-галерея и галерея пользователей) */
+/* ГАЛЕРЕЯ РАБОТ ПОЛЬЗОВАТЕЛЕЙ */
+
+/* Сетка */
 .gallery {
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, minmax(120px, 1fr));
-  gap: 16px;
+  gap: 12px;
 }
 
-/* Карточка для пользовательских работ */
+/* Карточка */
 .image-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background: transparent;
   text-align: center;
 }
 
-/* Картинки в галерее */
+/* Картинки: меньше, без обрезки, минимум пустого места */
 .gallery img {
-  width: 100%;
-  height: auto;
+  max-width: 100%;
+  max-height: 140px;      /* при желании можно 130/150 */
+  object-fit: contain;    /* вписать без обрезки */
   display: block;
   border-radius: 8px;
   background: #2a2a2a;
-  cursor: pointer; /* чтобы было видно, что по картинке можно кликать */
+  cursor: pointer;
 }
 
 /* Кнопка лайка */
@@ -241,19 +248,27 @@ button:hover {
 @media (max-width: 480px) {
   .gallery {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .creative-gallery-container {
     grid-template-columns: 1fr;
   }
 
-  .hero-title {
-    font-size: 32px;
-    letter-spacing: 0.08em;
+  .hero {
+    padding: 16px;
   }
 
   .hero-content {
+    max-width: 100%;
+    margin: 0 auto;
     padding: 16px 18px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+    letter-spacing: 0.08em;
+    text-align: center;
   }
 
   .section {
@@ -276,7 +291,7 @@ button:hover {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
-  display: none;           /* по умолчанию скрыто */
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 9999;

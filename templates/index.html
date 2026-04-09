@@ -22,7 +22,7 @@
       <p>Вы вошли как <strong>{{ username }}</strong>. <a href="{{ url_for('logout') }}">Выйти</a></p>
     </section>
 
-    <!-- ВТОРАЯ секция: форма загрузки работ пользователями (сразу после шапки) -->
+    <!-- Форма загрузки работ пользователями -->
     <section class="section dark-2">
       <h2>Добавить свою работу</h2>
       <p>Загрузи изображение (PNG/JPG до 2 МБ), оно попадёт в общую галерею ниже.</p>
@@ -33,7 +33,7 @@
       </form>
     </section>
 
-    <!-- ПЯТАЯ секция: галерея загруженных пользователями файлов (сразу после формы) -->
+    <!-- Галерея загруженных пользователями файлов -->
     <section class="section dark-1">
       <h2>Галерея работ пользователей</h2>
       <p>Здесь появляются изображения, загруженные через форму выше.</p>
@@ -52,7 +52,7 @@
       </div>
     </section>
 
-    <!-- ТРЕТЬЯ секция: ТВОРЧЕСКАЯ ГАЛЕРЕЯ (по creative.json, как было) -->
+    <!-- Творческая галерея по creative.json -->
     <section class="section dark-1">
       <h2>Творческая галерея</h2>
       <p>Серия работ в темных тонах: название, автор, год и короткая история каждой работы.</p>
@@ -62,7 +62,7 @@
       </div>
     </section>
 
-    <!-- ПЕРВАЯ секция (перенесена вниз): контакты -->
+    <!-- Контакты -->
     <section class="section dark-2">
       <h2>Связаться со мной</h2>
       <p>Выбери удобный способ, чтобы отправить свои работы.</p>
@@ -81,7 +81,7 @@
   </div>
 
   <script>
-    // Новая творческая галерея по creative.json
+    // Творческая галерея по creative.json
     async function loadCreativeGallery() {
       try {
         const response = await fetch('images/creative.json');
@@ -90,7 +90,7 @@
           return;
         }
 
-        const items = await response.json(); // массив объектов работ
+        const items = await response.json();
         const container = document.getElementById('creativeGallery');
         if (!container) return;
 
@@ -161,7 +161,6 @@
         modalImg.alt = '';
       }
 
-      // Клик по картинкам в .gallery и .creative-gallery-container
       document.body.addEventListener('click', function (e) {
         const target = e.target;
         if (target.tagName === 'IMG' && target.closest('.gallery, .creative-gallery-container')) {
@@ -169,17 +168,14 @@
         }
       });
 
-      // Закрытие по крестику
       modalClose.addEventListener('click', closeModal);
 
-      // Закрытие по клику по фону
       modal.addEventListener('click', function (e) {
         if (e.target === modal) {
           closeModal();
         }
       });
 
-      // Закрытие по Esc
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
           closeModal();

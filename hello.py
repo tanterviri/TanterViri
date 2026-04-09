@@ -124,7 +124,6 @@ def logout():
 @app.route("/", methods=["GET"])
 @login_required
 def index():
-    # Собираем список загруженных файлов
     uploads_dir = app.config["UPLOAD_FOLDER"]
     os.makedirs(uploads_dir, exist_ok=True)
     files = [
@@ -152,7 +151,6 @@ def index():
 @app.route("/upload", methods=["POST"])
 @login_required
 def upload():
-    # Проверяем, есть ли файл в запросе
     if "image" not in request.files:
         return redirect(url_for("index"))
 
@@ -160,7 +158,6 @@ def upload():
     if file.filename == "":
         return redirect(url_for("index"))
 
-    # Проверка расширения и сохранение
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         uploads_dir = app.config["UPLOAD_FOLDER"]
