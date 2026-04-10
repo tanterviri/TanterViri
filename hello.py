@@ -61,7 +61,7 @@ def get_current_user():
 
 def is_admin():
     # здесь можно подставить твой ник вместо 'admin'
-    return session.get("username") == "TANTER"
+    return session.get("username") == "TanterVirus"
 
 
 def login_required(view):
