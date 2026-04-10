@@ -5,7 +5,6 @@
   <title>TANTERcreativity</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Подключаем внешний CSS из static/css/style.css -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -45,6 +44,11 @@
             <button class="like-btn" data-id="{{ filename }}">
               ❤ <span class="like-count">{{ like_counts.get(filename, 0) }}</span>
             </button>
+
+            {# КНОПКА УДАЛЕНИЯ ТОЛЬКО ДЛЯ АДМИНА #}
+            {% if username == 'TANTER' %}
+              <button class="delete-btn" data-id="{{ filename }}">Удалить</button>
+            {% endif %}
           </div>
         {% else %}
           <p>Пока ни одной работы. Будь первым!</p>
@@ -183,8 +187,9 @@
       });
     });
 
-    // Лайки для галереи пользователей
+    // Лайки + удаление
     document.addEventListener("click", async (e) => {
+      // Лайки
       if (e.target.classList.contains("like-btn") || e.target.closest(".like-btn")) {
         const btn = e.target.closest(".like-btn");
         const imageId = btn.dataset.id;
@@ -203,6 +208,30 @@
 
         countSpan.textContent = data.count;
         btn.classList.toggle("liked", data.liked);
+        return;
+      }
+
+      // Удаление (кнопка есть только у админа)
+      if (e.target.classList.contains("delete-btn")) {
+        const btn = e.target;
+        const imageId = btn.dataset.id;
+
+        if (!confirm("Удалить эту работу?")) return;
+
+        const formData = new FormData();
+        formData.append("image_id", imageId);
+
+        const res = await fetch("/delete_image", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.success) {
+          const card = btn.closest(".image-card");
+          if (card) card.remove();
+        }
       }
     });
   </script>

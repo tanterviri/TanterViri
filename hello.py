@@ -59,6 +59,11 @@ def get_current_user():
     return User.query.filter_by(username=username).first()
 
 
+def is_admin():
+    # здесь можно подставить твой ник вместо 'admin'
+    return session.get("username") == "TANTER"
+
+
 def login_required(view):
     from functools import wraps
 
@@ -197,6 +202,32 @@ def like():
     liked = Like.query.filter_by(image_name=image_id, user_id=user.id).first() is not None
 
     return jsonify({"count": count, "liked": liked})
+
+
+# ---- УДАЛЕНИЕ ИЗОБРАЖЕНИЯ (ТОЛЬКО АДМИН) ----
+
+@app.route("/delete_image", methods=["POST"])
+@login_required
+def delete_image():
+    if not is_admin():
+        return jsonify({"error": "forbidden"}), 403
+
+    image_id = request.form.get("image_id")
+    if not image_id:
+        return jsonify({"error": "no_id"}), 400
+
+    uploads_dir = app.config["UPLOAD_FOLDER"]
+    filepath = os.path.join(uploads_dir, image_id)
+
+    # удаляем файл, если есть
+    if os.path.exists(filepath):
+        os.remove(filepath)
+
+    # удаляем все лайки, связанные с этим изображением
+    Like.query.filter_by(image_name=image_id).delete()
+    db.session.commit()
+
+    return jsonify({"success": True})
 
 
 # ---- СОЗДАНИЕ ТАБЛИЦ ПРИ ПЕРВОМ ЗАПУСКЕ ----

@@ -376,3 +376,20 @@ button:hover {
   margin-top: 12px;
   font-size: 14px;
 }
+
+/* ===== КНОПКА УДАЛЕНИЯ (ТОЛЬКО ДЛЯ АДМИНА) ===== */
+
+.delete-btn {
+  margin-top: 4px;
+  background: #b53131;
+  border: 1px solid #ff6b6b;
+  color: #fff;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.delete-btn:hover {
+  background: #992525;
+}
